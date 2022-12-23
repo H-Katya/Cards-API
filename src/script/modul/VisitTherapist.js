@@ -110,7 +110,8 @@ export default class VisitTherapist extends Visit {
     return newNode;
   }
   fillForm(){
-    this.showInputs(this.doctor)
+    this.hideInputs(this.doctor);
+    this.showInputs(this.doctor);
     this.form.doctor.value=this.doctor;
     this.form.status.value=this.status;
     this.form.purpose.value=this.purpose;

@@ -20,11 +20,39 @@ const loginModalObj = new bootstrap.Modal(
 );
 const loginForm = document.querySelector("#login-form");
 const submitLoginForm = document.querySelector(".login-submit");
+let token = null;
+const backupEmail = document.querySelector('#backupEmail');
+const backupPass = document.querySelector('#backupPass');
+const noCards = document.querySelector('#no-cards');
+
+
+backupEmail.addEventListener('click',()=>{
+  loginForm.email.value = backupEmail.innerText;
+
+});
+
+backupPass.addEventListener('click',()=>{
+  loginForm.pass.value = backupPass.innerText;
+});
 
 loginModal.addEventListener("hidden.bs.modal", (ev) => {
   loginForm.email.value = null;
   loginForm.pass.value = null;
 });
+
+
+const recoverySession = async () => {
+  token = localStorage.getItem("token");
+  let cards = Array.prototype.slice.call(await fetchGetCards(token));
+  if (cards.length !== 0) {
+    noCards.classList.add('d-none')
+    cards.forEach((el) => {
+      creatCard(el);
+    });
+  } else {
+    noCards.classList.remove('d-none')
+  }
+};
 
 const getToken = async (email, password) => {
   const response = await fetch(
@@ -40,29 +68,31 @@ const getToken = async (email, password) => {
   if (response.status === 200) {
     const result = await response.text();
     localStorage.setItem("token", result);
-    loginForm.email.value = null;
-    loginForm.pass.value = null;
-    loginBtn.style.display = "none";
-    visitBtn.style.display = "block";
+    loginForm.reset()
+    if (localStorage.getItem("token") !== null) {
+      loginBtn.style.display = "none";
+      visitBtn.style.display = "block";
+      recoverySession();
     alert("Great success");
     loginModalObj.hide();
   } else {
     alert(`Email or password incorrect`);
-  }
+  }}
 };
 
-submitLoginForm.addEventListener("click", () => {
+loginForm.addEventListener("submit", (event) => {
+  event.preventDefault()
   const email = loginForm.email.value;
   const password = loginForm.pass.value;
   getToken(email, password);
+  
 });
 
 // LOGIN FORM
 
 // Window ONLOAD
 const cardList = document.querySelector(".cardList");
-const noCards = document.querySelector('#no-cards');
-let token = localStorage.getItem("token");
+token = localStorage.getItem("token");
 
 const creatCard = async (obj) => {
   let card = null;
@@ -75,18 +105,6 @@ const creatCard = async (obj) => {
   }
   if (card !== null) {
     cardList.insertAdjacentElement("afterbegin", card.creatNode());
-  }
-};
-
-const recoverySession = async () => {
-  let cards = Array.prototype.slice.call(await fetchGetCards(token));
-  if (cards.length !== 0) {
-    noCards.classList.add('d-none')
-    cards.forEach((el) => {
-      creatCard(el);
-    });
-  } else {
-    noCards.classList.remove('d-none')
   }
 };
 
@@ -264,6 +282,4 @@ cleanValue.addEventListener("click", () => {
   filter();
 });
 status.addEventListener("change", filter);
-urgency.addEventListener("change", filter);
-
-// Filter FORM
+urgency.addEventListener("change", filter)

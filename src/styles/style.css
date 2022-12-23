@@ -1,4 +1,4 @@
-// @import 'reset';
+
 
 body{
     min-height:100vh;
@@ -26,11 +26,8 @@ ul {
 }
 .text--green{
     color: darkgreen;
-    
 }
+#backupPass,
 #backupEmail{
-    cursor: pointer;
-}
-#backupPass{
     cursor: pointer;
 }

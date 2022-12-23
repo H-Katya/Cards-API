@@ -16,7 +16,7 @@
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="./dist/style/styles.min.css" />
+    <link rel="stylesheet" href="./src/styles/style.css" />
     <link type="Image/x-icon" href="https://www.flaticon.com/ru/free-icon/healthcare-and-medical_1172424" rel="icon">
     <title>Step Cards API</title>
   </head>
@@ -26,7 +26,7 @@
         <div class="container-fluid">
           <a class="navbar-brand" href="#">
             <img
-              src="./dist/img/icon/doctor-icon.svg"
+              src="./src/img/icon/doctor-icon.svg"
               alt="doctor-icon"
               width="50"
               height="40"
@@ -67,7 +67,7 @@
             <div class="modal-header">
               <h5>You can register on the site <a href="https://ajax.test-danit.com/front-pages/cards-register.html" target="_blank">here</a> .<br>
                 Or use backup email:
-                <span class="text--green">notmy@email.com</span>  and password:<span class="text--green">123456</span>   </h5>
+                <span id="backupEmail" class="text--green">notmy@email.com</span>  and password:<span id="backupPass"  class="text--green">123456</span>   </h5>
               <button
                 type="button"
                 value=""
@@ -108,7 +108,7 @@
                   Close
                 </button>
                 <button
-                  type="button"
+                  type="submit"
                   class="btn btn-primary btn-submit login-submit"
                 >
                   Submit
@@ -173,7 +173,7 @@
                     type="text"
                     class="form-control visitInput"
                     id="visitPurpose"
-                    required = 'true'
+                    required 
                   />
                   <div class="invalid-feedback">Field is mandatory</div>
                 </div>
@@ -186,7 +186,7 @@
                     name="brief"
                     class="form-control visitInput"
                     id="visitBrief"
-                    required = 'true'
+                    required
                   ></textarea>
                   <div class="invalid-feedback">Field is mandatory</div>
                 </div>
@@ -200,7 +200,7 @@
                     id="visitUrgency"
                     class="form-select visitInput"
                     aria-label="Default select example"
-                    required = 'true'
+                    required
                   >
                     <option selected disabled value="">Choose...</option>
                     <option value="high">High</option>
@@ -219,7 +219,7 @@
                     type="text"
                     class="form-control visitInput"
                     id="visitFullName"
-                    required = 'true'
+                    required
                   />
                   <div class="invalid-feedback">Field is mandatory</div>
                 </div>
@@ -233,7 +233,7 @@
                     type="number"
                     class="form-control visitInput"
                     id="visitAge"
-                    required = 'true'
+                    required
                   />
                   <div class="invalid-feedback">Enter age. Field is mandatory</div>
                 </div>
@@ -247,7 +247,7 @@
                     type="date"
                     class="form-control visitInput"
                     id="visitDate"
-                    required = 'true'
+                    required
                   />
                   <div class="invalid-feedback">Field is mandatory</div>
                 </div>
@@ -261,7 +261,7 @@
                     type="number"
                     class="form-control"
                     id="visitBMI"
-                    required = 'true'
+                    required
                   />
                   <div class="invalid-feedback"> Enter <a href="https://www.nhlbi.nih.gov/health/educational/lose_wt/BMI/bmicalc.htm" target="_blank" >body mass index</a>. Field is mandatory</div>
                 </div>
@@ -275,7 +275,7 @@
                     type="text"
                     class="form-control"
                     id="visitDiseases"
-                    required = 'true'
+                    required
                   />
                   <div class="invalid-feedback">Field is mandatory</div>
                   <div class="mb-3 d-none">
